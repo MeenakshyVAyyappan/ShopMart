@@ -1,7 +1,7 @@
-import 'package:fcustomerdetails/model/customer_model.dart';
-import 'package:fcustomerdetails/screen/add_customer_screen.dart';
-import 'package:fcustomerdetails/service/customer_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shopmart/model/customer_model.dart';
+import 'package:shopmart/screen/add_customer_screen.dart';
+import 'package:shopmart/service/customer_service.dart';
 
 class CustomerListScreen extends StatefulWidget {
   const CustomerListScreen({Key? key}) : super(key: key);
@@ -19,8 +19,8 @@ class _CustomerListScreenState extends State<CustomerListScreen> {
     _customerFuture = ApiGetCustomer.getAllCustomers();
   }
 
-  Future<void> _deleteCustomer(int customerId) async {
-    final success = await ApiDeleteCustomer.deleteCustomer(customerId);
+  Future<void> _deleteCustomer(int custId) async {
+    final success = await ApiDeleteCustomer.deleteCustomer(custId);
     if (success) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

@@ -12,20 +12,20 @@ class CustomerModel {
 
   Map<String, dynamic> toJson() {
     return {
-      "CUSTNAME": custname,
-      "CUSTCITY": custcity,
-      "CUSTPHNUMBER": custphNumber,
-      "CUSTID": custId,
+      "custName": custname,
+      "custCity": custcity,
+      "custPhNumber": custphNumber,
+      "custId": custId,
     };
   }
 
   // Factory constructor to deserialize JSON
   factory CustomerModel.fromJson(Map<String, dynamic> json) {
     return CustomerModel(
-      custname: json["CUSTNAME"] ?? 'No Name',
-      custcity: json["CUSTCITY"] ?? 'No City',
-      custId: json['CUSTID'],
-      custphNumber: json['CUSTPHNUMBER'] ?? 'No Phone Number',
+      custname: json["custName"],
+      custcity: json["custCity"],
+      custId: json['custId'],
+      custphNumber: json['custPhNumber'],
     );
   }
 }

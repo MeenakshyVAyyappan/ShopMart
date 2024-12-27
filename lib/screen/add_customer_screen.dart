@@ -1,6 +1,6 @@
-import 'package:fcustomerdetails/model/customer_model.dart';
-import 'package:fcustomerdetails/service/customer_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shopmart/model/customer_model.dart';
+import 'package:shopmart/service/customer_service.dart';
 
 class AddCustomerScreen extends StatefulWidget {
   const AddCustomerScreen({Key? key}) : super(key: key);

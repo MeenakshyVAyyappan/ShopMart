@@ -1,8 +1,9 @@
-import 'package:fcustomerdetails/screen/add_customer_screen.dart';
-import 'package:fcustomerdetails/screen/add_product_screen.dart';
-import 'package:fcustomerdetails/screen/order_screen.dart';
-import 'package:fcustomerdetails/screen/update_delete_customer.dart';
 import 'package:flutter/material.dart';
+import 'package:shopmart/screen/oder_history.dart';
+import 'package:shopmart/screen/add_customer_screen.dart';
+import 'package:shopmart/screen/add_product_screen.dart';
+import 'package:shopmart/screen/order_screen.dart';
+import 'package:shopmart/screen/update_delete_customer.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -57,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 50),
                 // Row 2: Product Details & Order List
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -69,10 +70,19 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const AddProductScreen()));
+                                builder: (context) => AddProductScreen()));
                       },
                     ),
+                    // _buildOptionCard(
+                    //   icon: Icons.inventory_2,
+                    //   title: "Order History",
+                    //   onPressed: () {
+                    //     Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => OrderHistoryScreen()));
+                    //   },
+                    // ),
                     _buildOptionCard(
                       icon: Icons.list_alt,
                       title: "Order List",
@@ -86,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 50),
                 // Row 3: Back Button
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

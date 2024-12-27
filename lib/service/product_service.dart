@@ -1,35 +1,12 @@
 import 'dart:convert';
-import 'package:fcustomerdetails/model/product_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopmart/model/product_model.dart';
 
 class ApiServiceProduct {
   static const String _baseUrl = "http://localhost:5073/api/product";
 
-  static Future<bool> addProduct(ProductModel product) async {
-    try {
-      final response = await http.post(
-        Uri.parse(_baseUrl),
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(product.toJson()),
-      );
-
-      if (response.statusCode == 200) {
-        return true;
-      } else {
-        throw Exception("Failed to add product: ${response.statusCode}");
-      }
-    } catch (e) {
-      print("Error: $e");
-      return false;
-    }
-  }
-}
-
-class ApiGetProduct {
-  static const String _baseUrl = "http://localhost:5073/api/product";
-
   static Future<List<ProductModel>> fetchProducts() async {
-    var url = Uri.parse("$_baseUrl");
+    final url = Uri.parse("$_baseUrl");
     try {
       final response = await http.get(
         url,
@@ -48,6 +25,32 @@ class ApiGetProduct {
     } catch (e) {
       print("Error fetching products: $e");
       return [];
+    }
+  }
+
+  // Implementing the addProduct method
+  static Future<bool> addProduct(ProductModel newProduct) async {
+    final url = Uri.parse("$_baseUrl");
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode(newProduct.toJson()),
+      );
+
+      // Handle success based on both 200 and 201 status codes
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        print("Success: ${response.body}");
+        return true; // Success
+      } else {
+        // Log error details for debugging
+        print("Error: ${response.statusCode} - ${response.body}");
+        return false; // Failure
+      }
+    } catch (e) {
+      // Catch and log exceptions
+      print("Exception occurred while adding product: $e");
+      return false; // Failure
     }
   }
 }

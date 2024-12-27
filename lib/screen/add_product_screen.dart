@@ -1,6 +1,6 @@
-import 'package:fcustomerdetails/model/product_model.dart';
-import 'package:fcustomerdetails/service/product_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shopmart/model/product_model.dart';
+import 'package:shopmart/service/product_service.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({Key? key}) : super(key: key);
@@ -14,8 +14,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController _mrpcontroller = TextEditingController();
   final TextEditingController _stockcontroller = TextEditingController();
   bool _isLoading = false;
-
-  // Method to handle the product submission
   Future<void> _submitProduct() async {
     final name = _nameController.text.trim();
     final mrp = _mrpcontroller.text.trim();
@@ -101,8 +99,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Add Product"),
+        shape:
+            ContinuousRectangleBorder(borderRadius: BorderRadius.circular(700)),
+        title: const Text(
+          "Add Customer",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

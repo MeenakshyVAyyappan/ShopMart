@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:fcustomerdetails/model/customer_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:shopmart/model/customer_model.dart';
 
 class ApiServiceCustomer {
-  static const String _baseUrl = "http://localhost:5073/api/purchase";
+  static const String _baseUrl = "http://localhost:5073/api/customers";
 
   // POST: Add a new customer
   static Future<bool> addCustomer(CustomerModel customer) async {
@@ -30,35 +30,34 @@ class ApiServiceCustomer {
 }
 
 class ApiGetCustomer {
-  static const String _baseUrl = "http://localhost:5073/api/purchase";
+  static const String _baseUrl = "http://localhost:5073/api/customers";
 
   static Future<List<CustomerModel>> getAllCustomers() async {
-    var url = Uri.parse("$_baseUrl");
+    final url = Uri.parse(_baseUrl);
 
     try {
-      final response = await http.get(
-        url,
-        headers: {"Content-Type": "application/json"},
-      );
+      final response = await http.get(url, headers: {
+        "Content-Type": "application/json"
+      }).timeout(Duration(seconds: 10));
 
-      print(response.statusCode);
       if (response.statusCode == 200) {
-        List<dynamic> jsonData = jsonDecode(response.body);
-        return jsonData.map<CustomerModel>((json) {
-          return CustomerModel.fromJson(json);
-        }).toList();
+        final List<dynamic> jsonData = jsonDecode(response.body);
+        return jsonData
+            .map<CustomerModel>((json) => CustomerModel.fromJson(json))
+            .toList();
       } else {
-        throw Exception(
-            "Failed to fetch customers. Status Code: ${response.statusCode}");
+        print("Failed to fetch customers: ${response.statusCode}");
+        throw Exception("Error fetching customers: ${response.body}");
       }
     } catch (e) {
-      throw Exception("Error fetching customers: $e");
+      print("Error in getAllCustomers: $e");
+      return [];
     }
   }
 }
 
 class ApiDeleteCustomer {
-  static const String _baseUrl = "http://localhost:5073/api/purchase";
+  static const String _baseUrl = "http://localhost:5073/api/customers";
 
   // Delete a customer by ID
   static Future<bool> deleteCustomer(int custId) async {
@@ -84,7 +83,7 @@ class ApiDeleteCustomer {
 }
 
 class APiUpdateCustomer {
-  static const String _baseUrl = "http://localhost:5073/api/purchase";
+  static const String _baseUrl = "http://localhost:5073/api/customers";
   static updateCustomer(CustomerModel updatedCustomer) async {
     try {
       final response = await http.put(

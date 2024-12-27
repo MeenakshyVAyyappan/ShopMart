@@ -1,0 +1,87 @@
+// import 'package:flutter/material.dart';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
+// import 'order_history_screen.dart'; // Import the file where OrderModel is defined
+
+// class EditOrderScreen extends StatefulWidget {
+//   final OrderModel order;
+
+//   EditOrderScreen({required this.order});
+
+//   @override
+//   _EditOrderScreenState createState() => _EditOrderScreenState();
+// }
+
+// class _EditOrderScreenState extends State<EditOrderScreen> {
+//   late TextEditingController _quantityController;
+//   late TextEditingController _totalAmountController;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _quantityController = TextEditingController(text: widget.order.orderDetails[0].quantity.toString());
+//     _totalAmountController = TextEditingController(text: widget.order.orderDetails[0].totalAmount.toString());
+//   }
+
+//   Future<void> _updateOrder() async {
+//     final updatedOrder = {
+//       'orderID': widget.order.orderId,
+//       'customerId': widget.order.customerId,
+//       'netAmount': widget.order.netAmount,
+//       'orderDate': widget.order.orderDate,
+//       'orderDetails': [
+//         {
+//           'productId': widget.order.orderDetails[0].productId,
+//           'productName': widget.order.orderDetails[0].productName,
+//           'quantity': int.parse(_quantityController.text),
+//           'totalAmount': double.parse(_totalAmountController.text),
+//         }
+//       ]
+//     };
+
+//     final response = await http.put(
+//       Uri.parse('http://localhost:5073/api/OrderThTd/UpdateOrder'),
+//       headers: {'Content-Type': 'application/json'},
+//       body: json.encode(updatedOrder),
+//     );
+
+//     if (response.statusCode == 200) {
+//       Navigator.pop(context, true);
+//     } else {
+//       ScaffoldMessenger.of(context).showSnackBar(
+//           SnackBar(content: Text('Error updating order: ${response.body}')));
+//     }
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Edit Order'),
+//         backgroundColor: Colors.purple,
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Column(
+//           children: [
+//             TextField(
+//               controller: _quantityController,
+//               decoration: InputDecoration(labelText: 'Quantity'),
+//               keyboardType: TextInputType.number,
+//             ),
+//             TextField(
+//               controller: _totalAmountController,
+//               decoration: InputDecoration(labelText: 'Total Amount'),
+//               keyboardType: TextInputType.number,
+//             ),
+//             SizedBox(height: 20),
+//             ElevatedButton(
+//               onPressed: _updateOrder,
+//               child: Text('Update Order'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

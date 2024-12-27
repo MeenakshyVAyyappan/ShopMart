@@ -1,5 +1,5 @@
-import 'package:fcustomerdetails/home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shopmart/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding
